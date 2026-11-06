@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金牌影院-金牌影院在线观看_高清电影电视剧免费观看</title>
+<meta name="description" content="金牌影院是面向影视爱好者的在线观影入口，汇总电影、电视剧、纪录片与综艺的片单分类，提供清晰的高清资源导航与追剧入口，帮助观众快速找到想看的影片。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2316141a'/%3E%3Ccircle cx='32' cy='32' r='19' fill='none' stroke='%23e8b04b' stroke-width='3'/%3E%3Ccircle cx='32' cy='32' r='5' fill='%23e8b04b'/%3E%3Cpath d='M29 22v20l16-10z' fill='%23e8b04b'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#100f14;
+    --bg2:#18161e;
+    --card:#1d1b25;
+    --line:#2c2936;
+    --gold:#e8b04b;
+    --gold-dim:#b98a35;
+    --text:#efecf5;
+    --muted:#a49fb3;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  img,svg{display:block}
+  .wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 20px}
+
+  /* ---------- 页头 ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(16,15,20,.88);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    display:flex;align-items:center;gap:28px;
+    height:66px;
+  }
+  .logo{
+    display:flex;align-items:center;gap:10px;
+    font-size:19px;font-weight:700;letter-spacing:.5px;
+    color:var(--gold);white-space:nowrap;
+  }
+  .logo svg{width:30px;height:30px;flex:none}
+  .nav-links{
+    display:flex;gap:22px;margin-left:auto;
+    font-size:15px;color:var(--muted);
+  }
+  .nav-links a{padding:6px 0;border-bottom:2px solid transparent;transition:.2s}
+  .nav-links a:hover{color:var(--text);border-bottom-color:var(--gold)}
+  .nav-cta{
+    font-size:14px;padding:8px 18px;border-radius:999px;
+    background:var(--gold);color:#191712;font-weight:600;
+    transition:.2s;white-space:nowrap;
+  }
+  .nav-cta:hover{background:#f2c264}
+  .menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:6px 10px;color:var(--text);font-size:14px}
+
+  /* ---------- 首屏 ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(circle at 82% 22%, rgba(232,176,75,.16), transparent 46%),
+      radial-gradient(circle at 12% 88%, rgba(232,176,75,.07), transparent 44%),
+      linear-gradient(180deg,#16141b,#100f14);
+  }
+  .hero-inner{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:48px;
+    align-items:center;padding:70px 0 66px;
+  }
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;color:var(--gold);
+    border:1px solid rgba(232,176,75,.4);
+    border-radius:999px;padding:5px 14px;margin-bottom:22px;
+    background:rgba(232,176,75,.07);
+  }
+  .badge i{width:6px;height:6px;border-radius:50%;background:var(--gold);display:block}
+  h1{
+    font-size:clamp(30px,4.6vw,52px);
+    line-height:1.22;font-weight:800;letter-spacing:1px;
+    margin-bottom:20px;
+  }
+  h1 em{font-style:normal;color:var(--gold)}
+  .hero-p{color:var(--muted);font-size:16px;max-width:560px;margin-bottom:30px}
+  .hero-p strong{color:var(--text);font-weight:600}
+  .btn-row{display:flex;flex-wrap:wrap;gap:14px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 26px;border-radius:10px;font-size:15px;font-weight:600;
+    transition:.2s;
+  }
+  .btn-main{background:var(--gold);color:#191712}
+  .btn-main:hover{background:#f2c264;transform:translateY(-1px)}
+  .btn-ghost{border:1px solid var(--line);color:var(--text);background:var(--card)}
+  .btn-ghost:hover{border-color:var(--gold-dim);color:var(--gold)}
+  .hero-stats{display:flex;gap:36px;margin-top:38px;flex-wrap:wrap}
+  .hero-stats div span{display:block;font-size:24px;font-weight:800;color:var(--gold);line-height:1.3}
+  .hero-stats div small{font-size:13px;color:var(--muted)}
+
+  /* 首屏插画 */
+  .hero-art{position:relative}
+  .hero-art svg{width:100%;height:auto}
+  .art-label{
+    position:absolute;bottom:6px;right:6px;
+    font-size:12px;color:var(--muted);letter-spacing:1px;
+  }
+
+  /* ---------- 通用区块 ---------- */
+  section{padding:64px 0}
+  .sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:32px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(21px,2.6vw,27px);font-weight:700;letter-spacing:.5px}
+  .sec-head h2::before{
+    content:"";display:inline-block;width:4px;height:20px;border-radius:2px;
+    background:var(--gold);margin-right:12px;vertical-align:-2px;
+  }
+  .sec-head p{color:var(--muted);font-size:14px;max-width:520px}
+  .more{font-size:14px;color:var(--gold);white-space:nowrap}
+  .more:hover{text-decoration:underline}
+
+  /* ---------- 片单卡片 ---------- */
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;transition:.25s;display:flex;flex-direction:column;
+  }
+  .card:hover{transform:translateY(-4px);border-color:var(--gold-dim)}
+  .card .thumb{position:relative;aspect-ratio:16/10;background:#242130}
+  .card .thumb svg{width:100%;height:100%}
+  .tag{
+    position:absolute;left:10px;top:10px;
+    font-size:12px;padding:2px 9px;border-radius:6px;
+    background:rgba(232,176,75,.92);color:#191712;font-weight:600;
+  }
+  .card-body{padding:14px 15px 16px}
+  .card-body h3{font-size:15.5px;font-weight:600;margin-bottom:6px}
+  .card-body p{font-size:13px;color:var(--muted);line-height:1.6}
+  .meta{display:flex;gap:10px;font-size:12px;color:var(--gold-dim);margin-top:10px}
+
+  /* ---------- 分类导航 ---------- */
+  .cats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .cat{
+    display:flex;align-items:center;gap:16px;
+    background:linear-gradient(135deg,#1e1c27,#191720);
+    border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;transition:.2s;
+  }
+  .cat:hover{border-color:var(--gold-dim);background:linear-gradient(135deg,#252230,#1c1a24)}
+  .cat-ico{
+    width:46px;height:46px;flex:none;border-radius:12px;
+    background:rgba(232,176,75,.12);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .cat-ico svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:1.8}
+  .cat h3{font-size:16px;font-weight:600;margin-bottom:3px}
+  .cat p{font-size:13px;color:var(--muted)}
+
+  /* ---------- 筛选 ---------- */
+  .filter{
+    background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px 26px;
+  }
+  .filter-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+  .filter-row + .filter-row{margin-top:16px}
+  .filter-label{font-size:13px;color:var(--muted);min-width:44px}
+  .chip{
+    font-size:13.5px;padding:7px 16px;border-radius:999px;
+    border:1px solid var(--line);background:var(--card);color:var(--muted);
+    cursor:pointer;transition:.2s;font-family:inherit;
+  }
+  .chip:hover{color:var(--text);border-color:var(--gold-dim)}
+  .chip.active{background:var(--gold);border-color:var(--gold);color:#191712;font-weight:600}
+  .search-box{display:flex;gap:10px;flex:1;min-width:220px}
+  .search-box input{
+    flex:1;background:var(--card);border:1px solid var(--line);border-radius:9px;
+    padding:10px 14px;color:var(--text);font-size:14px;font-family:inherit;outline:none;
+  }
+  .search-box input:focus{border-color:var(--gold-dim)}
+  .search-box button{
+    background:var(--gold);border:none;border-radius:9px;padding:0 20px;
+    color:#191712;font-weight:600;font-size:14px;cursor:pointer;font-family:inherit;
+  }
+  .search-box button:hover{background:#f2c264}
+  .result-tip{font-size:13px;color:var(--muted);margin-top:16px}
+  .result-tip b{color:var(--gold)}
+
+  /* ---------- 两栏正文 ---------- */
+  .about-grid{display:grid;grid-template-columns:1.35fr .65fr;gap:44px;align-items:start}
+  .about-grid h2{font-size:clamp(21px,2.6vw,26px);margin-bottom:20px;font-weight:700}
+  .about-grid h2::before{content:"";display:inline-block;width:4px;height:19px;border-radius:2px;background:var(--gold);margin-right:12px;vertical-align:-1px}
+  .about-grid p{color:var(--muted);font-size:15px;margin-bottom:16px}
+  .about-grid p strong{color:var(--text);font-weight:600}
+  .side-card{
+    background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:24px;
+  }
+  .side-card h3{font-size:16px;margin-bottom:14px;color:var(--gold)}
+  .side-card ul{list-style:none}
+  .side-card li{
+    font-size:14px;color:var(--muted);padding:10px 0;
+    border-bottom:1px dashed var(--line);display:flex;gap:10px;
+  }
+  .side-card li:last-child{border-bottom:none}
+  .side-card li span{color:var(--gold-dim);font-weight:600;flex:none}
+  .dl-btn{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    margin-top:18px;padding:12px;border-radius:10px;
+    background:rgba(232,176,75,.14);border:1px solid rgba(232,176,75,.4);
+    color:var(--gold);font-size:14.5px;font-weight:600;
+    pointer-events:none;
+  }
+
+  /* ---------- 榜单 ---------- */
+  .rank-list{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+  .rank-item{
+    display:flex;align-items:center;gap:16px;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:15px 18px;transition:.2s;
+  }
+  .rank-item:hover{border-color:var(--gold-dim)}
+  .rank-num{
+    font-size:20px;font-weight:800;color:var(--gold-dim);
+    font-family:Georgia,serif;width:26px;flex:none;text-align:center;
+  }
+  .rank-item:nth-child(-n+2) .rank-num{color:var(--gold)}
+  .rank-info h3{font-size:15px;font-weight:600;margin-bottom:2px}
+  .rank-info p{font-size:12.5px;color:var(--muted)}
+  .rank-score{margin-left:auto;font-size:15px;font-weight:700;color:var(--gold)}
+
+  /* ---------- 提示条 ---------- */
+  .notice{
+    border-left:3px solid var(--gold-dim);
+    background:rgba(232,176,75,.05);
+    padding:16px 20px;border-radius:0 10px 10px 0;
+    font-size:14px;color:var(--muted);margin-top:26px;
+  }
+  .notice b{color:var(--text)}
+
+  /* ---------- 页尾 ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    background:var(--bg2);padding:44px 0 30px;margin-top:20px;
+  }
+  .foot-top{display:flex;justify-content:space-between;gap:36px;flex-wrap:wrap;margin-bottom:30px}
+  .foot-brand{max-width:340px}
+  .foot-brand .logo{margin-bottom:12px}
+  .foot-brand p{font-size:13.5px;color:var(--muted)}
+  .foot-links{display:flex;gap:56px;flex-wrap:wrap}
+  .foot-links h4{font-size:14px;color:var(--text);margin-bottom:12px}
+  .foot-links a{display:block;font-size:13.5px;color:var(--muted);padding:4px 0}
+  .foot-links a:hover{color:var(--gold)}
+  .foot-bottom{
+    border-top:1px solid var(--line);padding-top:20px;
+    display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+    font-size:12.5px;color:#7d788a;
+  }
+
+  /* ---------- 响应式 ---------- */
+  @media (max-width:960px){
+    .hero-inner{grid-template-columns:1fr;gap:30px;padding:52px 0 48px}
+    .hero-art{max-width:420px;order:-1;margin:0 auto}
+    .grid{grid-template-columns:repeat(2,1fr)}
+    .cats{grid-template-columns:1fr}
+    .about-grid{grid-template-columns:1fr;gap:30px}
+    .rank-list{grid-template-columns:1fr}
+    .nav-links{display:none}
+    .nav-links.open{
+      display:flex;flex-direction:column;gap:0;
+      position:absolute;top:66px;left:0;right:0;
+      background:var(--bg2);border-bottom:1px solid var(--line);
+      padding:10px 20px 16px;
+    }
+    .nav-links.open a{padding:11px 0;border-bottom:1px solid var(--line)}
+    .menu-toggle{display:block;margin-left:auto}
+    .nav-cta{display:none}
+  }
+  @media (max-width:560px){
+    .wrap{padding:0 16px}
+    section{padding:48px 0}
+    .grid{grid-template-columns:1fr}
+    .hero-stats{gap:24px}
+    .hero-stats div span{font-size:20px}
+    .filter{padding:18px}
+    .filter-label{width:100%}
+    .btn{padding:11px 20px;font-size:14px}
+    .foot-links{gap:32px}
+  }
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top" aria-label="金牌影院首页">
+      <svg viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="24" fill="none" stroke="#e8b04b" stroke-width="3"/>
+        <circle cx="32" cy="32" r="6" fill="#e8b04b"/>
+        <path d="M27 19v26l20-13z" fill="#e8b04b"/>
+      </svg>
+      金牌影院
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navLinks">菜单</button>
+    <nav class="nav-links" id="navLinks">
+      <a href="#picks">精选片单</a>
+      <a href="#categories">影片分类</a>
+      <a href="#filter">快速查找</a>
+      <a href="#about">观影说明</a>
+      <a href="#rank">本周热榜</a>
+    </nav>
+    <a class="nav-cta" href="#picks">开始观影</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- 首屏 -->
+  <div class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="badge"><i></i>电影 · 剧集 · 纪录片 · 综艺</span>
+        <h1>金牌影院</h1>
+        <p class="hero-p">
+          <strong>金牌影院</strong>把分散的影视片单收进一个入口：按类型、地区和年份归类，附上简介与看点，
+          让你不必在多个页面之间来回跳转。想看的电影、正在追的剧，都能在这里找到清晰的入口。
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-main" href="#picks">浏览精选片单</a>
+          <a class="btn btn-ghost" href="#filter">按条件查找影片</a>
+        </div>
+        <div class="hero-stats">
+          <div><span>6</span><small>影片大类</small></div>
+          <div><span>120+</span><small>收录片目</small></div>
+          <div><span>每日</span><small>片单更新</small></div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 420 320" role="presentation">
+          <defs>
+            <linearGradient id="scr" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#2a2635"/>
+              <stop offset="1" stop-color="#16141b"/>
+            </linearGradient>
+            <linearGradient id="beam" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#e8b04b" stop-opacity=".55"/>
+              <stop offset="1" stop-color="#e8b04b" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <rect x="24" y="26" width="372" height="212" rx="14" fill="url(#scr)" stroke="#38333f" stroke-width="1.5"/>
+          <rect x="24" y="26" width="372" height="212" rx="14" fill="url(#beam)" opacity=".5"/>
+          <circle cx="210" cy="132" r="46" fill="none" stroke="#e8b04b" stroke-width="2" opacity=".7"/>
+          <circle cx="210" cy="132" r="34" fill="none" stroke="#e8b04b" stroke-width="1" opacity=".35"/>
+          <path d="M198 108v48l42-24z" fill="#e8b04b"/>
+          <rect x="60" y="60" width="58" height="6" rx="3" fill="#4a4459"/>
+          <rect x="60" y="76" width="36" height="6" rx="3" fill="#3a3547"/>
+          <rect x="302" y="60" width="58" height="6" rx="3" fill="#4a4459"/>
+          <rect x="324" y="76" width="36" height="6" rx="3" fill="#3a3547"/>
+          <rect x="150" y="256" width="120" height="8" rx="4" fill="#2c2936"/>
+          <path d="M150 264l-26 34h172l-26-34z" fill="#1d1b25" stroke="#2c2936" stroke-width="1.5"/>
+          <circle cx="60" cy="200" r="4" fill="#e8b04b" opacity=".5"/>
+          <circle cx="360" cy="188" r="3" fill="#e8b04b" opacity=".4"/>
+          <circle cx="330" cy="220" r="2.5" fill="#e8b04b" opacity=".3"/>
+        </svg>
+        <span class="art-label">清晰片单 · 一站直达</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 精选片单 -->
+  <section id="picks">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>精选片单</h2>
+          <p>从近期口碑与讨论度较高的作品里挑出几部，每部附一句看点，方便你判断是否合口味。</p>
+        </div>
+        <a class="more" href="#filter">查看全部片目 →</a>
+      </div>
+      <div class="grid">
+        <article class="card">
+          <div class="thumb">
+            <svg viewBox="0 0 320 200" aria-hidden="true">
+              <rect width="320" height="200" fill="#221f2c"/>
+              <circle cx="160" cy="86" r="34" fill="none" stroke="#e8b04b" stroke-width="2" opacity=".55"/>
+              <path d="M150 70v32l28-16z" fill="#e8b04b" opacity=".85"/>
+              <rect x="0" y="150" width="320" height="50" fill="#191720"/>
+              <rect x="24" y="166" width="90" height="7" rx="3.5" fill="#3a3547"/>
+            </svg>
+            <span class="tag">电影</span>
+          </div>
+          <div class="card-body">
+            <h3>长镜头里的城市</h3>
+            <p>用一整夜的城市夜景串起三段人物关系，节奏舒缓，适合安静观看。</p>
+            <div class="meta"><span>剧情</span><span>2024</span><span>高清</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <svg viewBox="0 0 320 200" aria-hidden="true">
+              <rect width="320" height="200" fill="#1f2330"/>
+              <rect x="40" y="52" width="240" height="96" rx="8" fill="none" stroke="#e8b04b" stroke-width="2" opacity=".45"/>
+              <path d="M96 100h128M96 118h84" stroke="#4a4459" stroke-width="7" stroke-linecap="round"/>
+              <circle cx="252" cy="150" r="16" fill="#e8b04b" opacity=".3"/>
+            </svg>
+            <span class="tag">剧集</span>
+          </div>
+          <div class="card-body">
+            <h3>第七档案室</h3>
+            <p>单元式悬疑结构，每集一个独立案件，主线线索在季末汇合。</p>
+            <div class="meta"><span>悬疑</span><span>更新至12集</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <svg viewBox="0 0 320 200" aria-hidden="true">
+              <rect width="320" height="200" fill="#212028"/>
+              <path d="M0 150c60-40 110 10 160-18s100-6 160 22v46H0z" fill="#2c2936"/>
+              <circle cx="238" cy="62" r="22" fill="#e8b04b" opacity=".55"/>
+              <path d="M0 132c70-24 130 14 190-6s90-2 130 16" fill="none" stroke="#e8b04b" stroke-width="1.5" opacity=".4"/>
+            </svg>
+            <span class="tag">纪录片</span>
+          </div>
+          <div class="card-body">
+            <h3>沿着海岸线</h3>
+            <p>六集篇幅记录沿海小城的日常，画面与配乐是主要亮点。</p>
+            <div class="meta"><span>人文</span><span>全6集</span></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb">
+            <svg viewBox="0 0 320 200" aria-hidden="true">
+              <rect width="320" height="200" fill="#241f2b"/>
+              <rect x="70" y="46" width="180" height="108" rx="10" fill="none" stroke="#e8b04b" stroke-width="2" opacity=".5"/>
+              <circle cx="120" cy="100" r="14" fill="#e8b04b" opacity=".8"/>
+              <path d="M108 120h56M108 134h38" stroke="#4a4459" stroke-width="6" stroke-linecap="round"/>
+              <rect x="196" y="88" width="34" height="46" rx="4" fill="#3a3547"/>
+            </svg>
+            <span class="tag">综艺</span>
+          </div>
+          <div class="card-body">
+            <h3>周末放映厅</h3>
+            <p>每期邀请不同嘉宾聊一部电影，轻松向，适合边看边听。</p>
+            <div class="meta"><span>谈话</span><span>每周更新</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 分类 -->
+  <section id="categories" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>影片分类</h2>
+          <p>按内容形态划分六个入口，每一类下面再按题材与地区细分，减少无效翻找。</p>
+        </div>
+      </div>
+      <div class="cats">
+        <a class="cat" href="#filter">
+          <span class="cat-ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M10 9.5v5l4.5-2.5z"/></svg></span>
+          <div><h3>电影频道</h3><p>院线片与经典老片，按类型与年份归档</p></div>
+        </a>
+        <a class="cat" href="#filter">
+          <span class="cat-ico"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M8 6v12M16 6v12"/></svg></span>
+          <div><h3>电视剧集</h3><p>连载更新与完结剧，标注集数与更新状态</p></div>
+        </a>
+        <a class="cat" href="#filter">
+          <span class="cat-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+          <div><h3>纪录片</h3><p>自然、人文与历史题材，多为短集数</p></div>
+        </a>
+        <a class="cat" href="#filter">
+          <span class="cat-ico"><svg viewBox="0 0 24 24"><path d="M4 18V9M10 18V5M16 18v-6M22 18h-2"/><path d="M2 18h20"/></svg></span>
+          <div><h3>综艺节目</h3><p>季播与周更节目，附播出频率说明</p></div>
+        </a>
+        <a class="cat" href="#filter">
+          <span class="cat-ico"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 5.6 6.1.8-4.5 4.2 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.4l6.1-.8z"/></svg></span>
+          <div><h3>高分推荐</h3><p>按观众评分与讨论热度筛选的片目</p></div>
+        </a>
+        <a class="cat" href="#filter">
+          <span class="cat-ico"><svg viewBox="0 0 24 24"><path d="M3 12h18M12 3v18"/><circle cx="12" cy="12" r="9"/></svg></span>
+          <div><h3>新片速递</h3><p>近期上线作品，附上线时间与简介</p></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 快速查找 -->
+  <section id="filter">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>快速查找</h2>
+          <p>选择类型与地区，或直接输入片名关键词，结果会即时显示在下方。</p>
+        </div>
+      </div>
+      <div class="filter">
+        <div class="filter-row">
+          <span class="filter-label">类型</span>
+          <button class="chip active" data-type="all">全部</button>
+          <button class="chip" data-type="电影">电影</button>
+          <button class="chip" data-type="剧集">剧集</button>
+          <button class="chip" data-type="纪录片">纪录片</button>
+          <button class="chip" data-type="综艺">综艺</button>
+        </div>
+        <div class="filter-row">
+          <span class="filter-label">地区</span>
+          <button class="chip active" data-region="all">全部</button>
+          <button class="chip" data-region="华语">华语</button>
+          <button class="chip" data-region="欧美">欧美</button>
+          <button class="chip" data-region="日韩">日韩</button>
+        </div>
+        <div class="filter-row">
+          <div class="search-box">
+            <input type="search" id="searchInput" placeholder="输入片名或题材关键词，如“悬疑”“海岸线”" aria-label="搜索影片">
+            <button type="button" id="searchBtn">搜索</button>
+          </div>
+        </div>
+        <p class="result-tip" id="resultTip">当前显示 <b>4</b> 部精选片目</p>
+      </div>
+
+      <div class="grid" id="resultGrid" style="margin-top:26px;">
+        <article class="card" data-type="电影" data-region="华语">
+          <div class="thumb">
+            <svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="#221f2c"/><circle cx="160" cy="86" r="34" fill="none" stroke="#e8b04b" stroke-width="2" opacity=".55"/><path d="M150 70v32l28-16z" fill="#e8b04b" opacity=".85"/></svg>
+            <span class="tag">电影</span>
+          </div>
+          <div class="card-body"><h3>长镜头里的城市</h3><p>剧情 · 华语 · 2024</p></div>
+        </article>
+        <article class="card" data-type="剧集" data-region="华语">
+          <div class="thumb">
+            <svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="#1f2330"/><rect x="40" y="52" width="240" height="96" rx="8" fill="none" stroke="#e8b04b" stroke-width="2" opacity=".45"/><path d="M96 100h128M96 118h84" stroke="#4a4459" stroke-width="7" stroke-linecap="round"/></svg>
+            <span class="tag">剧集</span>
+          </div>
+          <div class="card-body"><h3>第七档案室</h3><p>悬疑 · 华语 · 更新至12集</p></div>
+        </article>
+        <article class="card" data-type="纪录片" data-region="欧美">
+          <div class="thumb">
+            <svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="#212028"/><path d="M0 150c60-40 110 10 160-18s100-6 160 22v46H0z" fill="#2c2936"/><circle cx="238" cy="62" r="22" fill="#e8b04b" opacity=".55"/></svg>
+            <span class="tag">纪录片</span>
+          </div>
+          <div class="card-body"><h3>沿着海岸线</h3><p>人文 · 欧美 · 全6集</p></div>
+        </article>
+        <article class="card" data-type="综艺" data-region="日韩">
+          <div class="thumb">
+            <svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="#241f2b"/><rect x="70" y="46" width="180" height="108" rx="10" fill="none" stroke="#e8b04b" stroke-width="2" opacity=".5"/><circle cx="120" cy="100" r="14" fill="#e8b04b" opacity=".8"/></svg>
+            <span class="tag">综艺</span>
+          </div>
+          <div class="card-body"><h3>周末放映厅</h3><p>谈话 · 日韩 · 每周更新</p></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 观影说明 -->
+  <section id="about" style="background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="wrap about-grid">
+      <div>
+        <h2>关于金牌影院</h2>
+        <p>
+          <strong>金牌影院</strong>是一个以片单组织为核心的观影入口。它不生产影片，而是把电影、剧集、纪录片与综艺按统一格式整理：
+          每部作品标注类型、地区、年份或更新状态，并配一句概括性的看点，帮助你在几十秒内判断要不要看下去。
+        </p>
+        <p>
+          在<strong>金牌影院</strong>里，查找路径被刻意做短。首页先给出精选与分类，再往下是可按类型、地区筛选的检索区，
+          输入片名或题材关键词即可缩小范围。对于连载剧集，页面会标注当前集数与更新频率，避免点进去才发现进度不符。
+        </p>
+        <p>
+          片单的整理标准以<strong>信息完整、描述克制</strong>为原则：简介只写题材、结构与主要看点，不做夸张评价；
+          评分与热度仅作为排序参考，不代表质量结论。若某部作品信息暂缺，会明确标注，而不是补写推测内容。
+        </p>
+        <div class="notice">
+          <b>使用提示：</b>本页片目信息用于观影选择参考，具体播放与画质以实际页面为准。片单会随整理进度调整，分类与筛选结果可能同步变化。
+        </div>
+      </div>
+      <aside class="side-card">
+        <h3>站点使用要点</h3>
+        <ul>
+          <li><span>01</span>首页精选四部，覆盖四类内容形态</li>
+          <li><span>02</span>分类页按类型与地区二级归档</li>
+          <li><span>03</span>筛选区支持关键词即时检索</li>
+          <li><span>04</span>剧集标注集数与更新状态</li>
+          <li><span>05</span>片单说明随整理进度更新</li>
+        </ul>
+        <a class="dl-btn" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 4v12M6 12l6 6 6-6M4 20h16"/></svg>
+          下载片单
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 热榜 -->
+  <section id="rank">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <h2>本周热榜</h2>
+          <p>依据站内浏览与收藏行为排序，仅反映近期关注度，供选片时参考。</p>
+        </div>
+      </div>
+      <div class="rank-list">
+        <a class="rank-item" href="#picks">
+          <span class="rank-num">1</span>
+          <div class="rank-info"><h3>第七档案室</h3><p>悬疑剧集 · 更新至12集</p></div>
+          <span class="rank-score">9.1</span>
+        </a>
+        <a class="rank-item" href="#picks">
+          <span class="rank-num">2</span>
+          <div class="rank-info"><h3>长镜头里的城市</h3><p>剧情电影 · 2024</p></div>
+          <span class="rank-score">8.8</span>
+        </a>
+        <a class="rank-item" href="#picks">
+          <span class="rank-num">3</span>
+          <div class="rank-info"><h3>沿着海岸线</h3><p>人文纪录片 · 全6集</p></div>
+          <span class="rank-score">8.6</span>
+        </a>
+        <a class="rank-item" href="#picks">
+          <span class="rank-num">4</span>
+          <div class="rank-info"><h3>周末放映厅</h3><p>谈话综艺 · 每周更新</p></div>
+          <span class="rank-score">8.3</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <span class="logo">
+          <svg viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="24" fill="none" stroke="#e8b04b" stroke-width="3"/>
+            <circle cx="32" cy="32" r="6" fill="#e8b04b"/>
+            <path d="M27 19v26l20-13z" fill="#e8b04b"/>
+          </svg>
+          金牌影院
+        </span>
+        <p>金牌影院以片单整理为核心，帮助观众按类型、地区与关键词快速定位想看的电影、剧集、纪录片与综艺。</p>
+      </div>
+      <div class="foot-links">
+        <div>
+          <h4>站内导航</h4>
+          <a href="#picks">精选片单</a>
+          <a href="#categories">影片分类</a>
+          <a href="#filter">快速查找</a>
+          <a href="#rank">本周热榜</a>
+        </div>
+        <div>
+          <h4>内容分类</h4>
+          <a href="#categories">电影频道</a>
+          <a href="#categories">电视剧集</a>
+          <a href="#categories">纪录片</a>
+          <a href="#categories">综艺节目</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2024 金牌影院 · 片单信息用于观影选择参考</span>
+      <span>内容整理与说明以页面实际展示为准</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* 移动端菜单 */
+  var toggle = document.getElementById('menuToggle');
+  var navLinks = document.getElementById('navLinks');
+  toggle.addEventListener('click', function(){
+    var open = navLinks.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navLinks.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){
+      navLinks.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+    }
+  });
+
+  /* 筛选逻辑 */
+  var cards = Array.prototype.slice.call(document.querySelectorAll('#resultGrid .card'));
+  var typeChips = document.querySelectorAll('.chip[data-type]');
+  var regionChips = document.querySelectorAll('.chip[data-region]');
+  var input = document.getElementById('searchInput');
+  var searchBtn = document.getElementById('searchBtn');
+  var tip = document.getElementById('resultTip');
+  var state = { type:'all', region:'all', kw:'' };
+
+  function applyFilter(){
+    var count = 0;
+    cards.forEach(function(card){
+      var t = card.getAttribute('data-type');
+      var r = card.getAttribute('data-region');
+      var text = card.textContent || '';
+      var okType = state.type === 'all' || t === state.type;
+      var okRegion = state.region === 'all' || r === state.region;
+      var okKw = !state.kw || text.indexOf(state.kw) !== -1;
+      var show = okType && okRegion && okKw;
+      card.style.display = show ? '' : 'none';
+      if(show) count++;
+    });
+    tip.innerHTML = '当前显示 <b>' + count + '</b> 部精选片目';
+  }
+
+  typeChips.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      typeChips.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      state.type = btn.getAttribute('data-type');
+      applyFilter();
+    });
+  });
+  regionChips.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      regionChips.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      state.region = btn.getAttribute('data-region');
+      applyFilter();
+    });
+  });
+  function doSearch(){
+    state.kw = input.value.trim();
+    applyFilter();
+  }
+  searchBtn.addEventListener('click', doSearch);
+  input.addEventListener('keydown', function(e){
+    if(e.key === 'Enter'){ e.preventDefault(); doSearch(); }
+  });
+  input.addEventListener('input', function(){
+    if(input.value.trim() === ''){ state.kw = ''; applyFilter(); }
+  });
+</script>
+
+</body>
+                                                                </html>
