@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日大赛twitter网站-每日大赛Twitter热门榜单_推特每日大赛内容入口</title>
+<meta name="description" content="每日大赛twitter网站聚合推特每日大赛的热门内容与榜单，按日期浏览当日大赛看点、热门条目与社区讨论，快速找到你想看的每日大赛Twitter内容入口。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23101826'/%3E%3Cpath d='M18 40l8-16 6 10 5-7 9 13z' fill='%2338bdf8'/%3E%3Ccircle cx='44' cy='20' r='5' fill='%23f9c74f'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0b1220;
+  --bg2:#101a2c;
+  --card:#152238;
+  --card2:#1b2b45;
+  --line:#24374f;
+  --txt:#e8eef7;
+  --sub:#9fb2c9;
+  --acc:#38bdf8;
+  --acc2:#f9c74f;
+  --ok:#4ade80;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--txt);
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+.wrap{width:min(1120px,92vw);margin:0 auto}
+
+/* header */
+.site-head{
+  position:sticky;top:0;z-index:50;
+  background:rgba(11,18,32,.88);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.head-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:18px;padding:14px 0;
+}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:17px;letter-spacing:.3px;white-space:nowrap}
+.logo .mark{
+  width:34px;height:34px;border-radius:10px;
+  background:linear-gradient(140deg,#1d4ed8,#0ea5e9);
+  display:grid;place-items:center;flex:0 0 auto;
+}
+.logo .mark svg{width:20px;height:20px}
+.nav{display:flex;gap:6px;flex-wrap:wrap}
+.nav a{
+  font-size:14px;color:var(--sub);padding:7px 12px;border-radius:8px;
+  transition:.2s;
+}
+.nav a:hover{color:var(--txt);background:var(--card2)}
+.head-cta{
+  font-size:14px;font-weight:600;padding:8px 16px;border-radius:9px;
+  background:var(--acc);color:#04121f;white-space:nowrap;
+  transition:.2s;
+}
+.head-cta:hover{filter:brightness(1.1)}
+
+/* hero */
+.hero{
+  position:relative;overflow:hidden;
+  padding:56px 0 44px;
+  border-bottom:1px solid var(--line);
+  background:
+    radial-gradient(900px 380px at 12% -10%,rgba(56,189,248,.16),transparent 60%),
+    radial-gradient(700px 320px at 92% 8%,rgba(249,199,79,.10),transparent 62%),
+    var(--bg2);
+}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:12.5px;color:var(--acc);letter-spacing:1px;
+  border:1px solid rgba(56,189,248,.35);
+  background:rgba(56,189,248,.08);
+  padding:5px 12px;border-radius:999px;margin-bottom:18px;
+}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--acc);animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+h1{
+  font-size:clamp(28px,4.4vw,46px);
+  line-height:1.22;font-weight:900;letter-spacing:-.5px;
+  margin-bottom:18px;
+}
+h1 .hl{color:var(--acc)}
+.hero p.lead{color:var(--sub);font-size:15.5px;max-width:52ch;margin-bottom:26px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:14.5px;font-weight:600;padding:11px 22px;border-radius:10px;
+  transition:.2s;cursor:pointer;border:1px solid transparent;
+}
+.btn-primary{background:var(--acc);color:#04121f}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-ghost{background:transparent;color:var(--txt);border-color:var(--line)}
+.btn-ghost:hover{background:var(--card2);border-color:#33507a}
+.btn[disabled],.btn.disabled{
+  background:var(--card2);color:var(--sub);border-color:var(--line);
+  pointer-events:none;opacity:.75;
+}
+.hero-stats{display:flex;gap:26px;margin-top:30px;flex-wrap:wrap}
+.hero-stats .st b{display:block;font-size:22px;font-weight:800;color:var(--txt)}
+.hero-stats .st span{font-size:12.5px;color:var(--sub)}
+
+/* hero visual */
+.hero-visual{
+  background:linear-gradient(160deg,var(--card),#0e1a2b);
+  border:1px solid var(--line);border-radius:18px;
+  padding:18px;box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+.hv-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.hv-title{font-size:13px;color:var(--sub);letter-spacing:.5px}
+.hv-badge{font-size:11px;color:var(--acc);background:rgba(56,189,248,.12);padding:3px 9px;border-radius:6px}
+.hv-item{
+  display:flex;gap:12px;align-items:flex-start;
+  padding:11px 0;border-top:1px dashed var(--line);
+}
+.hv-item:first-of-type{border-top:none}
+.hv-num{
+  flex:0 0 24px;height:24px;border-radius:7px;display:grid;place-items:center;
+  font-size:12px;font-weight:800;background:var(--card2);color:var(--acc);
+}
+.hv-item:nth-of-type(1) .hv-num{background:var(--acc2);color:#1a1200}
+.hv-txt{font-size:13.5px;line-height:1.5}
+.hv-txt small{display:block;color:var(--sub);font-size:11.5px;margin-top:2px}
+.hv-bar{height:5px;border-radius:3px;background:var(--card2);margin-top:14px;overflow:hidden}
+.hv-bar i{display:block;height:100%;width:72%;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:3px}
+
+/* section base */
+section{padding:56px 0}
+.sec-head{margin-bottom:30px}
+.sec-head .kicker{font-size:12.5px;color:var(--acc);letter-spacing:1.5px;font-weight:600;margin-bottom:8px}
+.sec-head h2{font-size:clamp(21px,2.8vw,28px);font-weight:800;letter-spacing:-.3px}
+.sec-head p{color:var(--sub);font-size:14.5px;margin-top:8px;max-width:66ch}
+
+/* tool bar */
+.toolbar{
+  display:flex;gap:12px;flex-wrap:wrap;align-items:center;
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:14px 16px;margin-bottom:26px;
+}
+.search-box{position:relative;flex:1 1 260px}
+.search-box svg{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:16px;height:16px;stroke:var(--sub)}
+.search-box input{
+  width:100%;background:var(--bg2);border:1px solid var(--line);border-radius:9px;
+  color:var(--txt);font-size:14px;padding:10px 12px 10px 36px;outline:none;
+  font-family:inherit;transition:.2s;
+}
+.search-box input:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(56,189,248,.15)}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{
+  font-size:13px;padding:7px 14px;border-radius:999px;cursor:pointer;
+  background:var(--bg2);border:1px solid var(--line);color:var(--sub);
+  transition:.2s;font-family:inherit;
+}
+.chip:hover{color:var(--txt);border-color:#33507a}
+.chip.on{background:rgba(56,189,248,.14);border-color:rgba(56,189,248,.5);color:var(--acc)}
+
+/* cards */
+.list-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.item{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:20px;transition:.22s;position:relative;overflow:hidden;
+}
+.item:hover{transform:translateY(-3px);border-color:#33507a;background:var(--card2)}
+.item-top{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.tag{
+  font-size:11.5px;padding:3px 9px;border-radius:6px;
+  background:rgba(56,189,248,.12);color:var(--acc);white-space:nowrap;
+}
+.tag.gold{background:rgba(249,199,79,.14);color:var(--acc2)}
+.tag.green{background:rgba(74,222,128,.12);color:var(--ok)}
+.item h3{font-size:16.5px;font-weight:700;margin-bottom:8px;line-height:1.45}
+.item p{font-size:13.8px;color:var(--sub);line-height:1.7}
+.item-meta{
+  display:flex;align-items:center;gap:14px;margin-top:14px;padding-top:12px;
+  border-top:1px solid var(--line);font-size:12px;color:#7b8ea6;
+}
+.item-meta .m{display:flex;align-items:center;gap:5px}
+.item-meta svg{width:13px;height:13px;stroke:#7b8ea6;fill:none;stroke-width:1.8}
+.no-result{
+  display:none;grid-column:1/-1;text-align:center;color:var(--sub);
+  padding:40px 0;font-size:14.5px;
+}
+
+/* flow */
+.flow-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.flow-card{
+  background:linear-gradient(170deg,var(--card),#0f1b2d);
+  border:1px solid var(--line);border-radius:14px;padding:24px;
+}
+.flow-card .ic{
+  width:42px;height:42px;border-radius:11px;display:grid;place-items:center;
+  background:rgba(56,189,248,.12);margin-bottom:16px;
+}
+.flow-card .ic svg{width:21px;height:21px;stroke:var(--acc);fill:none;stroke-width:1.7}
+.flow-card h3{font-size:16px;margin-bottom:8px}
+.flow-card p{font-size:13.8px;color:var(--sub)}
+.flow-card .step{font-size:11px;color:var(--acc);letter-spacing:1.5px;font-weight:700;margin-bottom:6px}
+
+/* about text block */
+.about{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:clamp(24px,4vw,40px);
+}
+.about h2{font-size:clamp(20px,2.6vw,26px);margin-bottom:16px;font-weight:800}
+.about p{font-size:14.8px;color:var(--sub);margin-bottom:14px;max-width:78ch}
+.about p:last-child{margin-bottom:0}
+.about strong{color:var(--txt);font-weight:700}
+.faq{margin-top:26px;border-top:1px solid var(--line);padding-top:22px}
+.faq details{border-bottom:1px solid var(--line);padding:12px 0}
+.faq details:last-child{border-bottom:none}
+.faq summary{
+  cursor:pointer;font-size:15px;font-weight:600;list-style:none;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--acc);font-size:18px;font-weight:400}
+.faq details[open] summary::after{content:"−"}
+.faq details p{font-size:14px;color:var(--sub);margin-top:10px}
+
+/* cta band */
+.band{
+  background:
+    radial-gradient(500px 200px at 20% 0%,rgba(56,189,248,.18),transparent 70%),
+    linear-gradient(120deg,#132a45,#0e1a2b);
+  border:1px solid #2a4366;border-radius:18px;
+  padding:clamp(26px,4vw,42px);
+  display:flex;align-items:center;justify-content:space-between;gap:26px;flex-wrap:wrap;
+}
+.band h2{font-size:clamp(19px,2.6vw,25px);font-weight:800;margin-bottom:8px}
+.band p{color:var(--sub);font-size:14px;max-width:52ch}
+.band .btns{display:flex;gap:12px;flex-wrap:wrap}
+
+/* footer */
+footer{
+  border-top:1px solid var(--line);background:#080e19;
+  padding:38px 0 26px;margin-top:10px;
+}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:30px;margin-bottom:26px}
+.foot-brand .logo{margin-bottom:12px}
+.foot-brand p{font-size:13.3px;color:var(--sub);max-width:38ch}
+.foot-col h4{font-size:13px;color:var(--txt);margin-bottom:12px;letter-spacing:.5px}
+.foot-col a{display:block;font-size:13.3px;color:var(--sub);padding:4px 0;transition:.2s}
+.foot-col a:hover{color:var(--acc)}
+.foot-bottom{
+  border-top:1px solid var(--line);padding-top:18px;
+  display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;
+  font-size:12.5px;color:#6b7f98;
+}
+.foot-bottom .kw{color:var(--acc)}
+
+/* responsive */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;gap:30px}
+  .hero-visual{order:2}
+  .flow-grid{grid-template-columns:1fr}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  .head-inner{flex-wrap:wrap;gap:10px;padding:12px 0}
+  .nav{order:3;width:100%;justify-content:flex-start;overflow-x:auto;padding-bottom:2px}
+  .nav a{font-size:13px;padding:6px 10px}
+  .head-cta{font-size:13px;padding:7px 13px}
+  .hero{padding:38px 0 32px}
+  .hero-stats{gap:20px}
+  .list-grid{grid-template-columns:1fr}
+  section{padding:42px 0}
+  .band{flex-direction:column;align-items:flex-start}
+  .foot-grid{grid-template-columns:1fr;gap:22px}
+  .toolbar{padding:12px}
+}
+@media(max-width:400px){
+  .logo{font-size:15px}
+  .logo .mark{width:30px;height:30px}
+}
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site-head">
+  <div class="wrap head-inner">
+    <a href="#top" class="logo" aria-label="每日大赛twitter网站 首页">
+      <span class="mark">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 17l4-8 4 6 3-4 5 6"/>
+          <circle cx="18" cy="6" r="2.2" fill="#f9c74f" stroke="none"/>
+        </svg>
+      </span>
+      <span>每日大赛twitter网站</span>
+    </a>
+    <nav class="nav" aria-label="主导航">
+      <a href="#today">今日榜单</a>
+      <a href="#list">大赛条目</a>
+      <a href="#how">浏览方式</a>
+      <a href="#about">关于本站</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+    <a href="#list" class="head-cta">看今日大赛</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="eyebrow"><span class="dot"></span>推特每日大赛 · 当日更新</div>
+        <h1>每日大赛twitter网站</h1>
+        <p class="lead">每天在推特上都会出现一批被反复转发、讨论的大赛内容。本站把当日散落在时间线里的看点归到一起，按日期与类别整理，让你不必翻几十条推文就能抓住今天的大赛脉络。</p>
+        <div class="hero-actions">
+          <a href="#list" class="btn btn-primary">
+            浏览今日大赛
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a href="#how" class="btn btn-ghost">了解浏览方式</a>
+        </div>
+        <div class="hero-stats">
+          <div class="st"><b>24h</b><span>当日更新周期</span></div>
+          <div class="st"><b>6 类</b><span>内容归类</span></div>
+          <div class="st"><b>1 页</b><span>串起当天看点</span></div>
+        </div>
+      </div>
+
+      <aside class="hero-visual" id="today" aria-label="今日大赛速览">
+        <div class="hv-head">
+          <span class="hv-title">今日大赛速览</span>
+          <span class="hv-badge">实时热度</span>
+        </div>
+        <div class="hv-item">
+          <span class="hv-num">1</span>
+          <div class="hv-txt">高转发条目集中出现<small>讨论量在数小时内快速抬升</small></div>
+        </div>
+        <div class="hv-item">
+          <span class="hv-num">2</span>
+          <div class="hv-txt">跨圈层内容进入榜单<small>原本小众的话题被更多账号引用</small></div>
+        </div>
+        <div class="hv-item">
+          <span class="hv-num">3</span>
+          <div class="hv-txt">旧条目二次回流<small>往期大赛内容被重新提起</small></div>
+        </div>
+        <div class="hv-bar"><i></i></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- LIST -->
+  <section id="list">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">TODAY'S BOARD</div>
+        <h2>今日大赛条目</h2>
+        <p>下面是当日被集中讨论的几类大赛内容，按热度与讨论走向做了简单归类。输入关键词或切换类别，可以快速筛出你更关心的那一条。</p>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-box">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+          <input type="search" id="q" placeholder="搜索大赛条目、类别或关键词…" aria-label="搜索大赛条目">
+        </div>
+        <div class="chips" role="group" aria-label="类别筛选">
+          <button class="chip on" data-cat="all">全部</button>
+          <button class="chip" data-cat="hot">热度</button>
+          <button class="chip" data-cat="topic">话题</button>
+          <button class="chip" data-cat="recap">回顾</button>
+        </div>
+      </div>
+
+      <div class="list-grid" id="grid">
+        <article class="item" data-cat="hot">
+          <div class="item-top"><span class="tag gold">热度首选</span><span class="tag">当日</span></div>
+          <h3>转发量骤升的头部条目</h3>
+          <p>当天被引用最多的大赛内容，通常在两三小时内完成一轮扩散。查看它时，重点看评论区里被反复提到的细节，而不是只看单条推文本身。</p>
+          <div class="item-meta">
+            <span class="m"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg>已归类</span>
+            <span class="m"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>当日更新</span>
+          </div>
+        </article>
+
+        <article class="item" data-cat="topic">
+          <div class="item-top"><span class="tag">话题</span><span class="tag green">讨论中</span></div>
+          <h3>围绕大赛细节的争论</h3>
+          <p>同一份大赛内容常被不同账号读出不同结论。把双方说法放在一起看，往往比只看一方更接近事情本身，也更省时间。</p>
+          <div class="item-meta">
+            <span class="m"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg>已归类</span>
+            <span class="m"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>多账号参与</span>
+          </div>
+        </article>
+
+        <article class="item" data-cat="recap">
+          <div class="item-top"><span class="tag">回顾</span><span class="tag">二次回流</span></div>
+          <h3>往期大赛的再次提起</h3>
+          <p>有些条目并非今天首次出现，而是在新的讨论里被重新拉回视野。这类内容值得回看原始出处，确认它被重新提起的语境。</p>
+          <div class="item-meta">
+            <span class="m"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>往期条目</span>
+            <span class="m"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>持续更新</span>
+          </div>
+        </article>
+
+        <article class="item" data-cat="hot">
+          <div class="item-top"><span class="tag gold">热度</span><span class="tag">扩散中</span></div>
+          <h3>跨圈层传播的条目</h3>
+          <p>当大赛内容从原本的关注圈走向更广的账号群体，讨论的口径往往会发生变化。留意哪些账号先转、哪些后转，能看出传播路径。</p>
+          <div class="item-meta">
+            <span class="m"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg>已归类</span>
+            <span class="m"><svg viewBox="0 0 24 24"><path d="M17 3l4 4-4 4"/><path d="M21 7H7"/><path d="M7 21l-4-4 4-4"/><path d="M3 17h14"/></svg>传播路径</span>
+          </div>
+        </article>
+
+        <article class="item" data-cat="topic">
+          <div class="item-top"><span class="tag">话题</span><span class="tag">细节向</span></div>
+          <h3>被反复引用的背景信息</h3>
+          <p>大赛条目里常夹带一些背景说明，它们决定了读者如何理解整件事。把这些背景单独拎出来看，能减少误读。</p>
+          <div class="item-meta">
+            <span class="m"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg>已归类</span>
+            <span class="m"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>当日更新</span>
+          </div>
+        </article>
+
+        <article class="item" data-cat="recap">
+          <div class="item-top"><span class="tag">回顾</span><span class="tag">对照</span></div>
+          <h3>同日不同版本的对照</h3>
+          <p>同一天里，同一件事可能被描述成几种版本。把它们并排放在一起，能更清楚地看到差异出现在哪个环节。</p>
+          <div class="item-meta">
+            <span class="m"><svg viewBox="0 0 24 24"><path d="M4 12l6 6L20 6"/></svg>已归类</span>
+            <span class="m"><svg viewBox="0 0 24 24"><path d="M8 6h12M8 12h12M8 18h12"/><path d="M4 6h.01M4 12h.01M4 18h.01"/></svg>多版本</span>
+          </div>
+        </article>
+
+        <p class="no-result" id="noResult">没有匹配的条目，换个关键词或切换类别试试。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW -->
+  <section id="how">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">HOW TO READ</div>
+        <h2>在每日大赛twitter网站怎么看</h2>
+        <p>不用注册、不用翻时间线。三步就能把当天的大赛脉络过一遍，剩下的再按兴趣深入。</p>
+      </div>
+      <div class="flow-grid">
+        <div class="flow-card">
+          <div class="step">STEP 01</div>
+          <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
+          <h3>先看今日速览</h3>
+          <p>首页顶部把当天最值得注意的三条变化列出来，先花一分钟了解今天大赛的整体走向，再决定要不要细看。</p>
+        </div>
+        <div class="flow-card">
+          <div class="step">STEP 02</div>
+          <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></div>
+          <h3>用筛选缩小范围</h3>
+          <p>条目按热度、话题、回顾三类排列，配合搜索框可以定位到具体内容。想省时间就直接从热度条目读起。</p>
+        </div>
+        <div class="flow-card">
+          <div class="step">STEP 03</div>
+          <div class="ic"><svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"/></svg></div>
+          <h3>回到原始推文核对</h3>
+          <p>本站只做归类与提示，具体说法仍以原始推文为准。看到感兴趣的条目，顺着出处回看上下文，判断会更稳。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="about">
+        <h2>关于每日大赛twitter网站</h2>
+        <p><strong>每日大赛twitter网站</strong>做的事情很具体：把推特上每天出现的大赛类内容收集、归类，再用一页纸的篇幅呈现出来。推特的时间线按时间顺序滚动，热度高低并不体现在排列上；很多被大量讨论的条目，反而会被新内容迅速顶下去。这里按“当天发生了什么”来组织，让读者先看到整体，再决定深入哪一条。</p>
+        <p>内容归类采用三个维度：<strong>热度</strong>关注转发与引用的集中程度，<strong>话题</strong>关注围绕细节的讨论，<strong>回顾</strong>关注往期条目被重新提起的情况。三个维度互不替代，同一条大赛内容可能同时进入多个分类，读者可以按自己的关注点选择入口。</p>
+        <p>需要说明的是，本站不生产大赛内容，也不对条目本身的真实性作出判断。所有归类都基于公开可见的讨论表现，具体信息请以原始推文和当事人的表述为准。遇到说法冲突的条目，建议把不同版本对照着看，而不是只取其中一方。</p>
+
+        <div class="faq" id="faq">
+          <details open>
+            <summary>每日大赛twitter网站的内容多久更新一次？</summary>
+            <p>以当天为周期整理，热度条目会随讨论变化调整顺序，回顾类条目按被重新提起的时间补充。</p>
+          </details>
+          <details>
+            <summary>为什么同一条大赛内容会出现在不同类别里？</summary>
+            <p>因为分类看的是不同的侧面：它可能既被大量转发，也引发了细节争论。多个标签并存是为了让读者从不同角度切入。</p>
+          </details>
+          <details>
+            <summary>本站会保存原始推文的完整内容吗？</summary>
+            <p>不会。这里只提供摘要式的提示，帮助判断是否值得进一步查看，完整内容需要回到原始推文阅读。</p>
+          </details>
+          <details>
+            <summary>搜索框能搜到什么范围？</summary>
+            <p>可以搜索当前页面上条目的标题、摘要与类别名。搜索在本地完成，不会上传任何输入内容。</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BAND -->
+  <section>
+    <div class="wrap">
+      <div class="band">
+        <div>
+          <h2>从今天的大赛看起</h2>
+          <p>每日大赛twitter网站把当天的看点收在一页里。先浏览速览，再按类别深入，比在时间线里盲翻更省时间。</p>
+        </div>
+        <div class="btns">
+          <a href="#list" class="btn btn-primary">回到今日条目</a>
+          <a href="#" class="btn disabled" data-download-placeholder="true" aria-disabled="true" tabindex="-1">下载</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="logo">
+          <span class="mark">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 17l4-8 4 6 3-4 5 6"/>
+              <circle cx="18" cy="6" r="2.2" fill="#f9c74f" stroke="none"/>
+            </svg>
+          </span>
+          <span>每日大赛twitter网站</span>
+        </div>
+        <p>推特每日大赛内容的归类页面。按日期整理当日看点，帮助读者用更短的时间掌握当天的大赛脉络。</p>
+      </div>
+      <div class="foot-col">
+        <h4>页面导航</h4>
+        <a href="#today">今日榜单</a>
+        <a href="#list">大赛条目</a>
+        <a href="#how">浏览方式</a>
+        <a href="#faq">常见问题</a>
+      </div>
+      <div class="foot-col">
+        <h4>内容说明</h4>
+        <a href="#about">关于本站</a>
+        <a href="#list">热度条目</a>
+        <a href="#list">话题讨论</a>
+        <a href="#list">往期回顾</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>每日大赛twitter网站 · 内容归公开讨论整理，具体以原始推文为准</span>
+      <span class="kw">每日大赛 · Twitter · 当日看点</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var grid = document.getElementById('grid');
+  var items = Array.prototype.slice.call(grid.querySelectorAll('.item'));
+  var q = document.getElementById('q');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var noResult = document.getElementById('noResult');
+  var activeCat = 'all';
+
+  function apply(){
+    var kw = (q.value || '').trim().toLowerCase();
+    var shown = 0;
+    items.forEach(function(el){
+      var cat = el.getAttribute('data-cat');
+      var text = el.textContent.toLowerCase();
+      var okCat = activeCat === 'all' || cat === activeCat;
+      var okKw = !kw || text.indexOf(kw) !== -1;
+      var show = okCat && okKw;
+      el.style.display = show ? '' : 'none';
+      if(show) shown++;
+    });
+    noResult.style.display = shown === 0 ? 'block' : 'none';
+  }
+
+  chips.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      chips.forEach(function(b){ b.classList.remove('on'); });
+      btn.classList.add('on');
+      activeCat = btn.getAttribute('data-cat');
+      apply();
+    });
+  });
+
+  q.addEventListener('input', apply);
+})();
+</script>
+</body>
+            </html>
