@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>www.91.com制片厂-91制片厂视频作品_91.com制片厂内容与浏览</title>
+<meta name="description" content="www.91.com制片厂主题首页：汇总制片厂视频作品归类、内容更新节奏与浏览入口，帮助访客快速找到想看的作品与栏目。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a1a22'/%3E%3Cpath d='M20 18v28l26-14z' fill='%23e6b34a'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#121218;
+  --bg-soft:#1a1a23;
+  --card:#1e1e28;
+  --line:#2c2c38;
+  --text:#e9e9ef;
+  --muted:#9d9daa;
+  --gold:#e6b34a;
+  --gold-soft:rgba(230,179,74,.12);
+  --radius:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB","Noto Sans SC",system-ui,sans-serif;
+  line-height:1.75;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 20px}
+
+/* header */
+.site-header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(18,18,24,.9);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;height:66px;
+}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:.3px;white-space:nowrap}
+.logo-mark{width:34px;height:34px;flex:none}
+.logo-text{color:var(--text)}
+.logo-text b{color:var(--gold);font-weight:700}
+nav.main-nav{display:flex;gap:22px;font-size:14.5px;color:var(--muted)}
+nav.main-nav a{transition:color .2s}
+nav.main-nav a:hover{color:var(--gold)}
+.header-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--gold);color:#1a1a22;
+  font-size:14px;font-weight:600;
+  padding:8px 16px;border-radius:999px;
+  white-space:nowrap;
+}
+.header-cta:hover{background:#f0c464}
+.menu-toggle{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;padding:6px 10px;font-size:14px}
+
+/* hero */
+.hero{
+  position:relative;
+  padding:64px 0 56px;
+  background:
+    radial-gradient(900px 380px at 12% -10%, rgba(230,179,74,.16), transparent 65%),
+    radial-gradient(700px 320px at 92% 8%, rgba(120,110,255,.10), transparent 60%);
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+.hero-inner{display:grid;grid-template-columns:1.25fr .75fr;gap:44px;align-items:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:13px;color:var(--gold);
+  background:var(--gold-soft);
+  border:1px solid rgba(230,179,74,.28);
+  padding:5px 12px;border-radius:999px;
+  margin-bottom:18px;
+}
+h1{
+  font-size:clamp(28px,4.4vw,46px);
+  line-height:1.25;font-weight:800;letter-spacing:.5px;
+  word-break:break-word;
+}
+h1 .accent{color:var(--gold)}
+.hero-lead{margin-top:18px;color:var(--muted);font-size:16.5px;max-width:560px}
+.hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:11px 22px;border-radius:999px;font-size:15px;font-weight:600;
+  border:1px solid transparent;cursor:pointer;transition:.2s;
+}
+.btn-primary{background:var(--gold);color:#1a1a22}
+.btn-primary:hover{background:#f0c464}
+.btn-ghost{border-color:var(--line);color:var(--text);background:var(--bg-soft)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.hero-art{
+  position:relative;border-radius:18px;overflow:hidden;
+  border:1px solid var(--line);background:var(--bg-soft);
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+}
+.hero-art svg{width:100%;height:100%}
+.hero-stats{display:flex;gap:28px;margin-top:32px;flex-wrap:wrap}
+.hero-stats div{font-size:13px;color:var(--muted)}
+.hero-stats strong{display:block;font-size:22px;color:var(--text);font-weight:700}
+
+/* section base */
+section{padding:58px 0}
+.section-head{margin-bottom:30px;max-width:720px}
+.section-head .tag{font-size:13px;color:var(--gold);letter-spacing:1px;font-weight:600}
+.section-head h2{font-size:clamp(21px,2.6vw,28px);margin-top:8px;font-weight:800;line-height:1.35}
+.section-head p{color:var(--muted);margin-top:10px;font-size:15px}
+
+/* quick find */
+.finder{
+  background:var(--bg-soft);border:1px solid var(--line);
+  border-radius:var(--radius);padding:22px;
+  display:flex;flex-wrap:wrap;gap:14px;align-items:center;
+}
+.finder label{font-size:14px;color:var(--muted);white-space:nowrap}
+.finder input{
+  flex:1 1 220px;min-width:0;
+  background:var(--bg);border:1px solid var(--line);border-radius:10px;
+  color:var(--text);padding:11px 14px;font-size:15px;outline:none;
+}
+.finder input:focus{border-color:var(--gold)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{
+  font-size:13px;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;
+  padding:5px 13px;background:var(--bg-soft);cursor:pointer;transition:.2s;
+}
+.chip:hover,.chip.active{border-color:var(--gold);color:var(--gold);background:var(--gold-soft)}
+.result-count{font-size:13.5px;color:var(--muted);margin-top:14px}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  overflow:hidden;transition:transform .2s,border-color .2s;
+  display:flex;flex-direction:column;
+}
+.card:hover{transform:translateY(-3px);border-color:rgba(230,179,74,.45)}
+.card-thumb{aspect-ratio:16/9;background:var(--bg-soft);position:relative;overflow:hidden}
+.card-thumb svg{width:100%;height:100%}
+.card-body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card-body h3{font-size:16.5px;font-weight:700;line-height:1.4}
+.card-body p{font-size:14px;color:var(--muted);flex:1}
+.card-meta{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
+.card-meta .k{color:var(--gold)}
+
+/* feature list */
+.feature-list{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.feature{
+  display:flex;gap:16px;align-items:flex-start;
+  background:var(--bg-soft);border:1px solid var(--line);
+  border-radius:var(--radius);padding:20px;
+}
+.feature .num{
+  flex:none;width:38px;height:38px;border-radius:10px;
+  background:var(--gold-soft);color:var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:15px;
+}
+.feature h3{font-size:16.5px;margin-bottom:6px}
+.feature p{font-size:14.5px;color:var(--muted)}
+
+/* update timeline */
+.timeline{list-style:none;border-left:2px solid var(--line);padding-left:24px;display:flex;flex-direction:column;gap:24px}
+.timeline li{position:relative}
+.timeline li::before{
+  content:"";position:absolute;left:-31px;top:7px;
+  width:12px;height:12px;border-radius:50%;
+  background:var(--gold);box-shadow:0 0 0 4px rgba(230,179,74,.15);
+}
+.timeline time{font-size:12.5px;color:var(--gold);letter-spacing:.5px}
+.timeline h3{font-size:16px;margin:4px 0 6px}
+.timeline p{font-size:14.5px;color:var(--muted)}
+
+/* download */
+.download{
+  background:linear-gradient(135deg,#20202b,#171720);
+  border:1px solid var(--line);border-radius:18px;
+  padding:36px;display:flex;flex-wrap:wrap;gap:24px;
+  align-items:center;justify-content:space-between;
+}
+.download h2{font-size:22px;margin-bottom:8px}
+.download p{color:var(--muted);font-size:14.5px;max-width:520px}
+.btn-download{background:var(--gold);color:#1a1a22;pointer-events:none;opacity:.9}
+
+/* faq */
+.faq details{
+  background:var(--bg-soft);border:1px solid var(--line);
+  border-radius:12px;padding:16px 20px;margin-bottom:12px;
+}
+.faq summary{font-size:15.5px;font-weight:600;cursor:pointer;list-style:none;position:relative;padding-right:24px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";position:absolute;right:0;top:0;color:var(--gold);font-weight:700}
+.faq details[open] summary::after{content:"–"}
+.faq details p{font-size:14.5px;color:var(--muted);margin-top:10px}
+
+/* footer */
+footer{border-top:1px solid var(--line);background:#101016;padding:40px 0 30px;margin-top:10px}
+.footer-top{display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;align-items:flex-start}
+.footer-brand{max-width:340px}
+.footer-brand p{font-size:13.5px;color:var(--muted);margin-top:12px}
+.footer-links{display:flex;flex-wrap:wrap;gap:40px}
+.footer-col h4{font-size:13.5px;color:var(--text);margin-bottom:12px;font-weight:700}
+.footer-col a{display:block;font-size:13.5px;color:var(--muted);margin-bottom:9px;transition:.2s}
+.footer-col a:hover{color:var(--gold)}
+.footer-bottom{
+  border-top:1px solid var(--line);margin-top:32px;padding-top:20px;
+  display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;
+  font-size:12.5px;color:var(--muted);
+}
+
+/* responsive */
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr;gap:32px}
+  .hero-art{max-width:460px;order:-1}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .feature-list{grid-template-columns:1fr}
+}
+@media(max-width:720px){
+  nav.main-nav{
+    display:none;position:absolute;top:66px;left:0;right:0;
+    background:#141419;border-bottom:1px solid var(--line);
+    flex-direction:column;gap:0;padding:8px 20px 16px;
+  }
+  nav.main-nav.open{display:flex}
+  nav.main-nav a{padding:11px 0;border-bottom:1px solid var(--line);font-size:15px}
+  .menu-toggle{display:inline-block}
+  .header-cta{display:none}
+  .hero{padding:44px 0 40px}
+  .grid{grid-template-columns:1fr}
+  .download{padding:26px 22px}
+  section{padding:44px 0}
+  .hero-stats{gap:20px}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .card:hover{transform:none}
+}
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="logo" href="#top" aria-label="www.91.com制片厂 首页">
+      <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
+        <rect width="64" height="64" rx="14" fill="#1a1a22" stroke="#2c2c38"/>
+        <path d="M22 18v28l24-14z" fill="#e6b34a"/>
+        <rect x="44" y="18" width="4" height="14" rx="2" fill="#e6b34a" opacity=".55"/>
+      </svg>
+      <span class="logo-text">www.91.com制片厂</span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#works">作品栏目</a>
+      <a href="#features">内容特色</a>
+      <a href="#updates">更新动态</a>
+      <a href="#faq">常见问题</a>
+    </nav>
+    <a class="header-cta" href="#works">进入作品区</a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav">菜单</button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+          制片厂内容首页
+        </span>
+        <h1>www.91.com制片厂</h1>
+        <p class="hero-lead">这里是 www.91.com制片厂 的主题首页，按栏目汇集制片厂出品的视频作品，说明内容分类方式、更新节奏与浏览路径，方便访客按兴趣快速定位到想看的条目。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#works">浏览作品栏目</a>
+          <a class="btn btn-ghost" href="#updates">查看更新动态</a>
+        </div>
+        <div class="hero-stats">
+          <div><strong>6</strong>内容栏目</div>
+          <div><strong>3</strong>浏览入口</div>
+          <div><strong>持续</strong>条目补充</div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 400 300" role="img" aria-label="制片厂主题插画">
+          <defs>
+            <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#e6b34a" stop-opacity=".9"/>
+              <stop offset="1" stop-color="#8a6a2a" stop-opacity=".5"/>
+            </linearGradient>
+          </defs>
+          <rect width="400" height="300" fill="#1a1a23"/>
+          <circle cx="320" cy="70" r="90" fill="#e6b34a" opacity=".07"/>
+          <circle cx="70" cy="240" r="110" fill="#7a6cff" opacity=".06"/>
+          <rect x="70" y="70" width="260" height="160" rx="12" fill="#22222d" stroke="#33333f"/>
+          <rect x="88" y="88" width="224" height="112" rx="8" fill="#16161d" stroke="#2c2c38"/>
+          <path d="M180 124l40 24-40 24z" fill="url(#g1)"/>
+          <rect x="88" y="210" width="224" height="8" rx="4" fill="#2c2c38"/>
+          <rect x="88" y="210" width="132" height="8" rx="4" fill="#e6b34a" opacity=".75"/>
+          <circle cx="70" cy="70" r="5" fill="#e6b34a"/>
+          <circle cx="330" cy="230" r="5" fill="#e6b34a" opacity=".6"/>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section id="works">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="tag">作品栏目</span>
+        <h2>按栏目认识 www.91.com制片厂 的内容</h2>
+        <p>栏目划分以内容取向为依据，方便访客从熟悉的类型进入。下列卡片说明每个栏目收录的作品方向与浏览要点。</p>
+      </div>
+
+      <div class="finder">
+        <label for="searchInput">在栏目中查找</label>
+        <input id="searchInput" type="search" placeholder="输入栏目名称或关键词，如：纪实、短片" autocomplete="off">
+        <button class="btn btn-primary" id="searchBtn" type="button">查找栏目</button>
+      </div>
+      <div class="chips" id="chipRow">
+        <button class="chip active" data-kw="">全部</button>
+        <button class="chip" data-kw="剧情">剧情</button>
+        <button class="chip" data-kw="纪实">纪实</button>
+        <button class="chip" data-kw="短片">短片</button>
+        <button class="chip" data-kw="花絮">花絮</button>
+      </div>
+      <p class="result-count" id="resultCount">当前展示 6 个栏目</p>
+
+      <div class="grid" id="cardGrid" style="margin-top:22px">
+        <article class="card" data-kw="剧情">
+          <div class="card-thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180"><rect width="320" height="180" fill="#1d1d27"/><rect x="26" y="34" width="120" height="112" rx="8" fill="#2a2a37"/><rect x="170" y="34" width="124" height="52" rx="8" fill="#2a2a37"/><rect x="170" y="94" width="124" height="52" rx="8" fill="#2a2a37"/><circle cx="86" cy="90" r="24" fill="#e6b34a" opacity=".55"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>剧情向作品</h3>
+            <p>以人物关系与情节推进为主，适合希望完整看一段叙事的访客。</p>
+            <div class="card-meta"><span>栏目 01</span><span class="k">叙事为主</span></div>
+          </div>
+        </article>
+
+        <article class="card" data-kw="纪实">
+          <div class="card-thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180"><rect width="320" height="180" fill="#1d1d27"/><circle cx="120" cy="86" r="40" fill="none" stroke="#e6b34a" stroke-width="3" opacity=".7"/><circle cx="120" cy="86" r="22" fill="#e6b34a" opacity=".45"/><rect x="196" y="56" width="80" height="10" rx="5" fill="#2a2a37"/><rect x="196" y="78" width="64" height="10" rx="5" fill="#2a2a37"/><rect x="196" y="100" width="72" height="10" rx="5" fill="#2a2a37"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>纪实风格条目</h3>
+            <p>偏向记录与观察的内容，节奏平稳，适合作背景观看或分段浏览。</p>
+            <div class="card-meta"><span>栏目 02</span><span class="k">观察记录</span></div>
+          </div>
+        </article>
+
+        <article class="card" data-kw="短片">
+          <div class="card-thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180"><rect width="320" height="180" fill="#1d1d27"/><rect x="110" y="40" width="100" height="100" rx="10" fill="#2a2a37"/><path d="M148 74l26 16-26 16z" fill="#e6b34a"/><rect x="38" y="70" width="52" height="40" rx="6" fill="#22222d" stroke="#33333f"/><rect x="230" y="70" width="52" height="40" rx="6" fill="#22222d" stroke="#33333f"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>短篇合集</h3>
+            <p>时长较短的条目集中呈现，适合碎片时间快速看完一段完整内容。</p>
+            <div class="card-meta"><span>栏目 03</span><span class="k">时长较短</span></div>
+          </div>
+        </article>
+
+        <article class="card" data-kw="花絮">
+          <div class="card-thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180"><rect width="320" height="180" fill="#1d1d27"/><path d="M60 130l40-60 40 40 30-30 50 50z" fill="#2a2a37"/><circle cx="236" cy="56" r="16" fill="#e6b34a" opacity=".65"/><rect x="40" y="140" width="240" height="6" rx="3" fill="#2a2a37"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>幕后与花絮</h3>
+            <p>围绕作品产生的周边片段，补充正片之外的信息与观看趣味。</p>
+            <div class="card-meta"><span>栏目 04</span><span class="k">周边片段</span></div>
+          </div>
+        </article>
+
+        <article class="card" data-kw="剧情">
+          <div class="card-thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180"><rect width="320" height="180" fill="#1d1d27"/><rect x="40" y="46" width="240" height="88" rx="8" fill="#22222d" stroke="#33333f"/><rect x="58" y="64" width="90" height="8" rx="4" fill="#2a2a37"/><rect x="58" y="82" width="140" height="8" rx="4" fill="#2a2a37"/><rect x="58" y="100" width="70" height="8" rx="4" fill="#e6b34a" opacity=".6"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>系列连载</h3>
+            <p>按顺序展开、可分集收看的作品，建议从起始条目进入并按序浏览。</p>
+            <div class="card-meta"><span>栏目 05</span><span class="k">按序收看</span></div>
+          </div>
+        </article>
+
+        <article class="card" data-kw="纪实">
+          <div class="card-thumb" aria-hidden="true">
+            <svg viewBox="0 0 320 180"><rect width="320" height="180" fill="#1d1d27"/><rect x="60" y="40" width="200" height="100" rx="10" fill="#22222d" stroke="#33333f"/><path d="M96 118l28-34 24 20 20-28 36 42z" fill="#2a2a37"/><circle cx="130" cy="70" r="10" fill="#e6b34a" opacity=".6"/></svg>
+          </div>
+          <div class="card-body">
+            <h3>主题专题</h3>
+            <p>围绕同一方向归集的作品集合，适合按兴趣一次性浏览多条目。</p>
+            <div class="card-meta"><span>栏目 06</span><span class="k">专题归集</span></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" style="background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="tag">内容特色</span>
+        <h2>www.91.com制片厂 的浏览体验要点</h2>
+        <p>栏目与条目之外，页面在结构上做了几处安排，让查找与连续浏览更省力。</p>
+      </div>
+      <div class="feature-list">
+        <div class="feature">
+          <span class="num">01</span>
+          <div>
+            <h3>栏目先于条目</h3>
+            <p>先看栏目说明再进具体条目，能在不了解作品的情况下判断是否合口味，减少来回翻找。</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="num">02</span>
+          <div>
+            <h3>标注内容取向</h3>
+            <p>每个栏目卡片标明作品方向与观看建议，如叙事为主、时长较短、按序收看，便于快速取舍。</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="num">03</span>
+          <div>
+            <h3>更新有迹可循</h3>
+            <p>新增条目按时间记录在更新动态中，访客可以判断最近是否有新内容进入对应栏目。</p>
+          </div>
+        </div>
+        <div class="feature">
+          <span class="num">04</span>
+          <div>
+            <h3>移动端优先阅读</h3>
+            <p>卡片在小屏下改为单列排列，导航收进菜单，正文行长与间距按手机阅读习惯调整。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="updates">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="tag">更新动态</span>
+        <h2>最近的内容与栏目变化</h2>
+        <p>以下记录反映栏目与条目层面的调整，帮助常来 www.91.com制片厂 的访客了解近期变化。</p>
+      </div>
+      <ul class="timeline">
+        <li>
+          <time>近期</time>
+          <h3>短篇合集栏目补充新条目</h3>
+          <p>短篇合集继续按较短时长收录作品，新进入的条目与已有条目保持同一分类口径，便于连续观看。</p>
+        </li>
+        <li>
+          <time>近期</time>
+          <h3>专题归集方式调整</h3>
+          <p>主题专题改为按内容方向归集，同一方向下的作品集中呈现，减少了分散在不同栏目中的情况。</p>
+        </li>
+        <li>
+          <time>近期</time>
+          <h3>栏目卡片增加观看建议</h3>
+          <p>每张栏目卡片补充了观看建议标签，例如叙事为主、按序收看，方便在不打开条目的情况下判断内容取向。</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="download" style="padding-top:0">
+    <div class="wrap">
+      <div class="download">
+        <div>
+          <h2>获取 www.91.com制片厂 栏目清单</h2>
+          <p>整理当前栏目划分与各栏目观看建议的清单文件，方便离线查阅或在其他设备上对照浏览。</p>
+        </div>
+        <a class="btn btn-download" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">下载</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="tag">常见问题</span>
+        <h2>关于 www.91.com制片厂 的几点说明</h2>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>栏目和条目是什么关系？</summary>
+          <p>栏目是内容的分类，条目是栏目下的具体作品。建议先看栏目说明，再进入对应条目，能更快找到合适的内容方向。</p>
+        </details>
+        <details>
+          <summary>系列连载应该从哪里开始看？</summary>
+          <p>系列连载按顺序展开，建议从起始条目进入并按序浏览，避免因跳看而丢失上下文。</p>
+        </details>
+        <details>
+          <summary>更新动态多久记录一次？</summary>
+          <p>更新动态按实际发生的栏目与条目调整记录，不做固定周期的承诺，访客以页面显示的最近记录为参考。</p>
+        </details>
+        <details>
+          <summary>清单文件包含哪些内容？</summary>
+          <p>清单文件汇总当前栏目名称、栏目说明与观看建议标签，不包含具体作品文件本身。下载入口可用后即可获取。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="logo" href="#top">
+          <svg class="logo-mark" viewBox="0 0 64 64" aria-hidden="true">
+            <rect width="64" height="64" rx="14" fill="#1a1a22" stroke="#2c2c38"/>
+            <path d="M22 18v28l24-14z" fill="#e6b34a"/>
+            <rect x="44" y="18" width="4" height="14" rx="2" fill="#e6b34a" opacity=".55"/>
+          </svg>
+          <span class="logo-text">www.91.com制片厂</span>
+        </a>
+        <p>www.91.com制片厂 主题首页，按栏目汇集作品、说明内容取向并记录更新变化，为访客提供清晰的浏览路径。</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>栏目</h4>
+          <a href="#works">作品栏目</a>
+          <a href="#features">内容特色</a>
+          <a href="#updates">更新动态</a>
+        </div>
+        <div class="footer-col">
+          <h4>访问</h4>
+          <a href="#faq">常见问题</a>
+          <a href="#download">栏目清单</a>
+          <a href="#top">返回顶部</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© www.91.com制片厂 主题首页</span>
+      <span>页面内容以栏目说明与更新记录为准</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var toggle = document.getElementById('menuToggle');
+  var nav = document.getElementById('mainNav');
+  toggle.addEventListener('click', function(){
+    var open = nav.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  nav.addEventListener('click', function(e){
+    if(e.target.tagName === 'A'){
+      nav.classList.remove('open');
+      toggle.setAttribute('aria-expanded','false');
+    }
+  });
+
+  var input = document.getElementById('searchInput');
+  var cards = Array.prototype.slice.call(document.querySelectorAll('#cardGrid .card'));
+  var countEl = document.getElementById('resultCount');
+  var chips = Array.prototype.slice.call(document.querySelectorAll('#chipRow .chip'));
+  var currentChip = '';
+
+  function applyFilter(){
+    var kw = input.value.trim();
+    var shown = 0;
+    cards.forEach(function(card){
+      var text = card.textContent + ' ' + (card.getAttribute('data-kw') || '');
+      var matchChip = !currentChip || text.indexOf(currentChip) > -1;
+      var matchKw = !kw || text.indexOf(kw) > -1;
+      var show = matchChip && matchKw;
+      card.style.display = show ? '' : 'none';
+      if(show) shown++;
+    });
+    countEl.textContent = '当前展示 ' + shown + ' 个栏目';
+  }
+
+  chips.forEach(function(chip){
+    chip.addEventListener('click', function(){
+      chips.forEach(function(c){ c.classList.remove('active'); });
+      chip.classList.add('active');
+      currentChip = chip.getAttribute('data-kw') || '';
+      applyFilter();
+    });
+  });
+
+  document.getElementById('searchBtn').addEventListener('click', applyFilter);
+  input.addEventListener('input', applyFilter);
+})();
+</script>
+</body>
+        </html>
