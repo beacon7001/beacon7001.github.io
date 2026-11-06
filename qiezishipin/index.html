@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>茄子视频凹凸-凹凸视频资源分类_茄子视频内容频道</title>
+<meta name="description" content="茄子视频凹凸是茄子视频的资源分类入口，按内容频道、热门片单与更新节奏组织浏览，帮助访客快速找到想看的内容并了解使用方式。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314111f'/%3E%3Cpath d='M20 18h24a4 4 0 0 1 4 4v20a4 4 0 0 1-4 4H20a4 4 0 0 1-4-4V22a4 4 0 0 1 4-4z' fill='none' stroke='%237c5cff' stroke-width='3'/%3E%3Cpath d='M28 26l10 6-10 6z' fill='%23ff5c93'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --bg:#0e0c17;
+    --bg2:#15121f;
+    --card:#1a1626;
+    --line:#2a2438;
+    --text:#ece9f5;
+    --muted:#a49dbb;
+    --accent:#7c5cff;
+    --accent2:#ff5c93;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",system-ui,-apple-system,"Segoe UI",sans-serif;
+    line-height:1.75;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{width:100%;max-width:1140px;margin:0 auto;padding:0 20px;}
+
+  /* header */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(14,12,23,.86);
+    backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex;align-items:center;gap:28px;height:66px;}
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;letter-spacing:.5px;white-space:nowrap;}
+  .logo-mark{
+    width:34px;height:34px;border-radius:10px;flex:none;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    display:grid;place-items:center;
+  }
+  .logo-mark svg{width:18px;height:18px;}
+  .nav-links{display:flex;gap:22px;margin-left:auto;font-size:14px;color:var(--muted);}
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{
+    font-size:14px;padding:8px 16px;border-radius:999px;
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#fff;font-weight:600;white-space:nowrap;
+  }
+  .nav-cta:hover{opacity:.9;}
+
+  /* hero */
+  .hero{
+    position:relative;overflow:hidden;
+    padding:56px 0 48px;
+    border-bottom:1px solid var(--line);
+    background:
+      radial-gradient(680px 300px at 12% -10%,rgba(124,92,255,.28),transparent 65%),
+      radial-gradient(560px 280px at 88% 0%,rgba(255,92,147,.18),transparent 65%);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:44px;align-items:center;}
+  .badge{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;color:#cfc6ff;
+    background:rgba(124,92,255,.14);
+    border:1px solid rgba(124,92,255,.4);
+    padding:5px 13px;border-radius:999px;margin-bottom:18px;
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);flex:none;}
+  h1{
+    font-size:clamp(28px,4.2vw,42px);
+    line-height:1.28;
+    font-weight:800;
+    letter-spacing:.5px;
+    margin-bottom:16px;
+    background:linear-gradient(100deg,#fff 20%,#c8bcff 70%,#ffb9d1 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero p{color:var(--muted);font-size:16px;max-width:540px;margin-bottom:26px;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:12px;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:12px 24px;border-radius:999px;font-size:15px;font-weight:600;
+    transition:.18s;
+  }
+  .btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(124,92,255,.35);}
+  .btn-ghost{border:1px solid var(--line);color:var(--text);background:rgba(255,255,255,.03);}
+  .btn-ghost:hover{border-color:var(--accent);}
+  .hero-stats{display:flex;gap:30px;margin-top:34px;flex-wrap:wrap;}
+  .stat b{display:block;font-size:22px;color:#fff;font-weight:800;}
+  .stat span{font-size:13px;color:var(--muted);}
+
+  .hero-art{
+    border-radius:20px;border:1px solid var(--line);
+    background:linear-gradient(160deg,#1c1730,#141020 70%);
+    padding:18px;box-shadow:0 24px 60px rgba(0,0,0,.45);
+  }
+  .art-screen{
+    border-radius:12px;overflow:hidden;
+    background:radial-gradient(300px 160px at 30% 20%,rgba(124,92,255,.45),transparent 70%),#0b0913;
+    aspect-ratio:16/10;display:grid;place-items:center;
+  }
+  .art-screen svg{width:64px;height:64px;opacity:.95;}
+  .art-rows{display:grid;gap:9px;margin-top:16px;}
+  .art-row{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--muted);}
+  .art-row i{width:26px;height:26px;border-radius:7px;flex:none;background:linear-gradient(135deg,rgba(124,92,255,.55),rgba(255,92,147,.4));}
+  .bar{height:7px;border-radius:999px;background:var(--line);flex:1;}
+  .bar span{display:block;height:100%;border-radius:999px;background:linear-gradient(90deg,var(--accent),var(--accent2));}
+
+  /* section */
+  section{padding:58px 0;}
+  .sec-head{margin-bottom:28px;max-width:720px;}
+  .sec-head h2{font-size:clamp(21px,2.6vw,27px);font-weight:800;margin-bottom:10px;letter-spacing:.4px;}
+  .sec-head p{color:var(--muted);font-size:15px;}
+  .kicker{
+    font-size:12.5px;letter-spacing:2px;color:var(--accent2);
+    font-weight:700;text-transform:uppercase;margin-bottom:10px;
+  }
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .card{
+    background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;transition:.2s;
+  }
+  .card:hover{border-color:rgba(124,92,255,.6);transform:translateY(-3px);}
+  .card-icon{
+    width:42px;height:42px;border-radius:11px;display:grid;place-items:center;margin-bottom:14px;
+    background:rgba(124,92,255,.15);border:1px solid rgba(124,92,255,.35);
+  }
+  .card-icon svg{width:21px;height:21px;stroke:#b9a8ff;}
+  .card h3{font-size:16.5px;font-weight:700;margin-bottom:8px;}
+  .card p{font-size:14px;color:var(--muted);}
+
+  /* channel list */
+  .channel{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .ch-item{
+    display:flex;gap:14px;align-items:flex-start;
+    background:var(--bg2);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 20px;
+  }
+  .ch-num{
+    font-size:13px;font-weight:800;color:var(--accent2);
+    border:1px solid rgba(255,92,147,.45);border-radius:8px;
+    width:30px;height:30px;display:grid;place-items:center;flex:none;
+  }
+  .ch-item h4{font-size:15.5px;margin-bottom:5px;}
+  .ch-item p{font-size:13.5px;color:var(--muted);}
+
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;counter-reset:s;}
+  .step{position:relative;padding:24px 22px;border-radius:var(--radius);background:var(--card);border:1px solid var(--line);}
+  .step::before{
+    counter-increment:s;content:"0" counter(s);
+    font-size:32px;font-weight:800;color:rgba(124,92,255,.35);
+    display:block;margin-bottom:8px;letter-spacing:1px;
+  }
+  .step h3{font-size:16px;margin-bottom:8px;}
+  .step p{font-size:13.8px;color:var(--muted);}
+
+  /* faq */
+  .faq{display:grid;gap:12px;}
+  details{
+    background:var(--bg2);border:1px solid var(--line);border-radius:12px;
+    padding:16px 20px;
+  }
+  details[open]{border-color:rgba(124,92,255,.5);}
+  summary{
+    cursor:pointer;font-weight:600;font-size:15px;list-style:none;
+    display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+";color:var(--accent2);font-size:19px;font-weight:700;}
+  details[open] summary::after{content:"−";}
+  details p{font-size:14px;color:var(--muted);margin-top:12px;}
+
+  /* download */
+  .dl-box{
+    display:flex;flex-wrap:wrap;align-items:center;gap:24px;justify-content:space-between;
+    border:1px solid var(--line);border-radius:18px;padding:28px;
+    background:linear-gradient(120deg,rgba(124,92,255,.16),rgba(255,92,147,.1));
+  }
+  .dl-box h2{font-size:21px;margin-bottom:8px;}
+  .dl-box p{font-size:14px;color:var(--muted);max-width:520px;}
+  .btn-download{
+    background:#fff;color:#14111f;font-weight:700;
+    padding:12px 28px;border-radius:999px;font-size:15px;
+    pointer-events:none;opacity:.92;
+  }
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:34px 0 40px;background:var(--bg2);
+  }
+  .foot{display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;align-items:flex-start;}
+  .foot-brand{max-width:360px;}
+  .foot-brand .logo{margin-bottom:10px;}
+  .foot-brand p{font-size:13px;color:var(--muted);}
+  .foot-links{display:flex;gap:26px;flex-wrap:wrap;font-size:13.5px;color:var(--muted);}
+  .foot-links a:hover{color:var(--text);}
+  .copyright{margin-top:26px;padding-top:18px;border-top:1px solid var(--line);font-size:12.5px;color:#6d6684;}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:32px;}
+    .hero-art{order:-1;max-width:420px;}
+    .cards,.steps{grid-template-columns:1fr 1fr;}
+    .channel{grid-template-columns:1fr;}
+  }
+  @media (max-width:640px){
+    .nav{height:60px;gap:14px;}
+    .logo{font-size:16px;}
+    .nav-links{display:none;}
+    .nav-cta{margin-left:auto;font-size:13px;padding:7px 14px;}
+    .hero{padding:38px 0 34px;}
+    .hero p{font-size:15px;}
+    .hero-stats{gap:22px;margin-top:26px;}
+    .cards,.steps{grid-template-columns:1fr;}
+    section{padding:44px 0;}
+    .dl-box{padding:22px;}
+  }
+</style>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top">
+      <span class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="3" stroke="#fff" stroke-width="1.8"/><path d="M10 9l5 3-5 3z" fill="#fff"/></svg>
+      </span>
+      茄子视频凹凸
+    </a>
+    <nav class="nav-links">
+      <a href="#channels">内容频道</a>
+      <a href="#features">分类说明</a>
+      <a href="#howto">浏览方式</a>
+      <a href="#faq">常见疑问</a>
+    </nav>
+    <a class="nav-cta" href="#channels">进入频道</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="badge"><span class="dot"></span>资源分类 · 内容频道入口</span>
+        <h1>茄子视频凹凸</h1>
+        <p>茄子视频凹凸是茄子视频按内容特征划分的资源分类入口，把不同题材的片单归入清晰频道，配合更新节奏与热门排序，让访客少绕路、直接找到想看的类型。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#channels">浏览内容频道</a>
+          <a class="btn btn-ghost" href="#howto">了解浏览方式</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><b>6</b><span>内容频道</span></div>
+          <div class="stat"><b>3</b><span>排序维度</span></div>
+          <div class="stat"><b>每日</b><span>片单更新</span></div>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="art-screen">
+          <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="3" stroke="#b9a8ff" stroke-width="1.6"/><path d="M10 9l5 3-5 3z" fill="#ff5c93"/></svg>
+        </div>
+        <div class="art-rows">
+          <div class="art-row"><i></i><div class="bar"><span style="width:82%"></span></div></div>
+          <div class="art-row"><i></i><div class="bar"><span style="width:64%"></span></div></div>
+          <div class="art-row"><i></i><div class="bar"><span style="width:74%"></span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">分类说明</div>
+        <h2>茄子视频凹凸的分类逻辑</h2>
+        <p>分类不是简单堆叠，而是围绕“想看什么”这一访问需求展开。茄子视频凹凸把片单按题材、时长与热度三条线索拆分，方便在不同心情下快速切换。</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 6h16M4 12h10M4 18h7"/></svg></div>
+          <h3>按题材归类</h3>
+          <p>将相近题材的片单收进同一频道，避免在大量条目中反复翻找，是茄子视频凹凸最基础的整理方式。</p>
+        </article>
+        <article class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></div>
+          <h3>按时长筛选</h3>
+          <p>短片段与完整内容分列，休息间隙与完整观看场景各有对应入口，减少选择成本。</p>
+        </article>
+        <article class="card">
+          <div class="card-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M4 17l5-5 4 3 7-8"/><path d="M4 20h16"/></svg></div>
+          <h3>按热度排序</h3>
+          <p>近期关注度较高的条目集中呈现，茄子视频凹凸的排序会随实际浏览情况调整，不固定不变。</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="channels">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">内容频道</div>
+        <h2>六个主要频道，各管一类需求</h2>
+        <p>频道之间保持相对独立，每个频道都有明确的收录范围。进入茄子视频凹凸后，可先选频道再挑条目，避免一次面对全部内容。</p>
+      </div>
+      <div class="channel">
+        <div class="ch-item">
+          <span class="ch-num">01</span>
+          <div><h4>热门聚合</h4><p>近期关注度靠前的条目汇总，适合没有明确目标时先看看。</p></div>
+        </div>
+        <div class="ch-item">
+          <span class="ch-num">02</span>
+          <div><h4>短片段</h4><p>时长较短的内容集中管理，适合碎片时间快速浏览。</p></div>
+        </div>
+        <div class="ch-item">
+          <span class="ch-num">03</span>
+          <div><h4>完整内容</h4><p>单条时长较完整的片单，适合预留整段空闲时使用。</p></div>
+        </div>
+        <div class="ch-item">
+          <span class="ch-num">04</span>
+          <div><h4>题材专题</h4><p>围绕同一题材归纳成专题，方便连续查看同类内容。</p></div>
+        </div>
+        <div class="ch-item">
+          <span class="ch-num">05</span>
+          <div><h4>最新更新</h4><p>按更新先后排列，茄子视频凹凸的新增条会出现在这里。</p></div>
+        </div>
+        <div class="ch-item">
+          <span class="ch-num">06</span>
+          <div><h4>收藏回看</h4><p>留存已看过的条目，便于日后回到上次的位置继续。</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="howto">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">浏览方式</div>
+        <h2>三步完成一次有效浏览</h2>
+        <p>茄子视频凹凸的页面结构围绕浏览效率设计，按以下顺序操作，通常能在较短时间内定位目标内容。</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <h3>先确定方向</h3>
+          <p>有明确题材就进专题频道，没有方向就从热门聚合开始。方向确定后，后续筛选会明显变快。</p>
+        </div>
+        <div class="step">
+          <h3>再用排序收窄</h3>
+          <p>在频道内切换更新、热度与时长排序，把候选条目压缩到可接受的数量范围。</p>
+        </div>
+        <div class="step">
+          <h3>最后留存记录</h3>
+          <p>把感兴趣的条目加入收藏回看，下次打开茄子视频凹凸时不必重新检索。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <div class="sec-head">
+        <div class="kicker">常见疑问</div>
+        <h2>关于茄子视频凹凸的四个问题</h2>
+        <p>以下回答基于页面现有栏目与功能范围整理，未涉及未公开的服务承诺。</p>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>茄子视频凹凸和茄子视频是什么关系？</summary>
+          <p>凹凸是茄子视频下的资源分类入口，承担频道划分与片单组织的职责，本身不独立于茄子视频之外，浏览时仍处于同一内容体系内。</p>
+        </details>
+        <details>
+          <summary>频道里的排序是固定的吗？</summary>
+          <p>不是。热度与更新排序会随实际收录情况变化，茄子视频凹凸不承诺某个条目长期停留在固定位置，建议以进入频道时看到的顺序为准。</p>
+        </details>
+        <details>
+          <summary>没有明确想看的内容时怎么开始？</summary>
+          <p>建议先看热门聚合或最新更新两个频道，这两处条目相对集中，适合作为浏览起点；有偏好后再转向题材专题。</p>
+        </details>
+        <details>
+          <summary>收藏回看会保存多久？</summary>
+          <p>收藏记录依附于当前使用环境，清理浏览器数据后可能丢失。重要条目可另行记录，茄子视频凹凸不提供跨设备同步的额外保证。</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="dl-box">
+        <div>
+          <h2>下载茄子视频凹凸入口说明</h2>
+          <p>包含频道划分、排序规则与浏览顺序的简要说明，方便在离线时对照查看。下载入口将在资源就绪后开放。</p>
+        </div>
+        <a class="btn-download" href="#" data-download-placeholder="true" aria-disabled="true" tabindex="-1">下载</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div class="foot-brand">
+        <a class="logo" href="#top">
+          <span class="logo-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="3" stroke="#fff" stroke-width="1.8"/><path d="M10 9l5 3-5 3z" fill="#fff"/></svg>
+          </span>
+          茄子视频凹凸
+        </a>
+        <p>茄子视频凹凸按题材、时长与热度组织内容频道，帮助访客用更短路径找到想看的类型。</p>
+      </div>
+      <div class="foot-links">
+        <a href="#channels">内容频道</a>
+        <a href="#features">分类说明</a>
+        <a href="#howto">浏览方式</a>
+        <a href="#faq">常见疑问</a>
+      </div>
+    </div>
+    <div class="copyright">© 茄子视频凹凸 · 内容频道与资源分类入口</div>
+  </div>
+</footer>
+
+</body>
+</html>
